@@ -1,6 +1,6 @@
 package Tests;
 
-import Methods.TestMethods;
+import Methods.Methods;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,7 +21,7 @@ public class AuthorizationTest {
     @Test
     public void Test() throws InterruptedException {
 
-        TestMethods authorize = new TestMethods();
+        Methods authorize = new Methods();
         authorize.OpenBeru(driver,url);
         authorize.Authorise(driver);
         authorize.CheckAuthorization(driver);
