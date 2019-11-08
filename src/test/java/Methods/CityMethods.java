@@ -13,8 +13,8 @@ public class CityMethods {
 
     private By cityButton = By.className("_2LxmV3b641");
     private By cityChange = By.xpath("/html/body/div[7]/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/div/div/div/div/div[1]/div/div/input");
-    private By cityChooseButton = By.xpath("/html/body/div[7]/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/div/div/div/div/div[2]/ul/li[1]/div/div[1]");
-    private By cityConfirmButton = By.xpath("/html/body/div[7]/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/div[2]/div[2]/button");
+    private By cityConfirmButton1 = By.xpath("/html/body/div[7]/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/div/div/div/div/div[2]/ul/li[1]/div/div[1]");
+    private By cityConfirmButton2 = By.xpath("/html/body/div[7]/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div/div/div/div[2]/div[2]/button");
     private By cityResult = By.xpath("//span[contains(@data-auto,'region-form-opener')]//span[2]");
     int i;
 
@@ -31,14 +31,14 @@ public class CityMethods {
 
             driver1.findElement(cityChange).sendKeys(charArray[i] + "");
             i++;
-            return driver1.findElement(cityChooseButton).getText().split("\n")[0].equals(city);
+            return driver1.findElement(cityConfirmButton1).getText().split("\n")[0].equals(city);
         });
 
-        wait.until(ExpectedConditions.elementToBeClickable(cityChooseButton));
-        webElement = driver.findElement(cityChooseButton);
+        wait.until(ExpectedConditions.elementToBeClickable(cityConfirmButton1));
+        webElement = driver.findElement(cityConfirmButton1);
         webElement.click();
-        wait.until(ExpectedConditions.elementToBeClickable(cityConfirmButton));
-        webElement = driver.findElement(cityConfirmButton);
+        wait.until(ExpectedConditions.elementToBeClickable(cityConfirmButton2));
+        webElement = driver.findElement(cityConfirmButton2);
         webElement.click();
     }
 
