@@ -1,8 +1,6 @@
 package Tests;
 
-import Methods.AuthorizationMethods;
-import Methods.CityMethods;
-import Methods.ToothbrushMethods;
+import Pages.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,54 +13,51 @@ public class BeruTests {
     private String city;
     private int lowPrice;
     private int highPrice;
+    private Main main = new Main();
+    private Authorization authorization = new Authorization();
+    private CityChange cityChange = new CityChange();
+    private CiteCatalog citeCatalog = new CiteCatalog();
+    private BeautyCatalog beautyCatalog = new BeautyCatalog();
+    private ToothbrushesCatalog toothbrushesCatalog = new ToothbrushesCatalog();
 
     @Before
     public void setUp()
     {
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
+
         driver = new ChromeDriver();
-
         url = "https://beru.ru";
-
         login = "testlogin.ivanov";
         password = "testpassword.ivanov";
-
         city = "Хвалынск";
-
         lowPrice = 999;
         highPrice = 1999;
-
         driver.manage().window().fullscreen();
         driver.get(url);
 
-
-
-
     }
 
-    @Test
+
     public void AuthorizationTest() throws InterruptedException {
+        main.AuthoriseClick(driver);
+        authorization.Authorise(driver,login,password);
+        main.CheckAuthorization(driver);
+    }
 
-        AuthorizationMethods authorize = new AuthorizationMethods();
-        authorize.Authorise(driver, login, password);
-        authorize.CheckAuthorization(driver);
+
+    public void CityTest() throws InterruptedException {
+        main.ChangeCityClick(driver);
+        cityChange.ChangeCity(driver, city);
+        main.CheckCity(driver, city);
 
     }
 
     @Test
-    public void CityTest() throws InterruptedException {
-
-        CityMethods changecity = new CityMethods();
-        changecity.ChangeCity(driver, city);
-        changecity.CheckCity(driver, city);
-    }
-
-
     public void ToothbrushTest() throws InterruptedException {
-
-        ToothbrushMethods checktoothbrush = new ToothbrushMethods();
-        checktoothbrush.ChoseToothbrush(driver);
-        checktoothbrush.ChoseToothbrushPrice(driver, lowPrice, highPrice);
-        checktoothbrush.checkPriceList(driver, lowPrice, highPrice);
+        main.CatalogClick(driver);
+        citeCatalog.BeautySectionClick(driver);
+        beautyCatalog.ElectricToothbrushesClick(driver);
+        toothbrushesCatalog.ChoseToothbrushPrice(driver,lowPrice,highPrice);
+        driver.quit();
     }
 }

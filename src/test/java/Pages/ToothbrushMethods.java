@@ -1,4 +1,4 @@
-package Methods;
+package Pages;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
