@@ -64,12 +64,15 @@ public class BeruTests {
 
     @Test
     public void ToothbrushTest() throws InterruptedException {
+        main.AuthoriseClick(driver);
+        authorization.Authorise(driver,login,password);
         main.CatalogClick(driver);
         citeCatalog.BeautySectionClick(driver);
         beautyCatalog.ElectricToothbrushesClick(driver);
         toothbrushesCatalog.ChoseToothbrushPrice(driver,lowPrice,highPrice);
         toothbrushesCatalog.CheckPriceRange(driver, lowPrice, highPrice);
         toothbrushesCatalog.ClickShowMore(driver);
-        driver.quit();
-    }
+        toothbrushesCatalog.purchaseLast(driver);
+        toothbrushesCatalog.goToCart(driver);
+}
 }
