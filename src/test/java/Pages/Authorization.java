@@ -1,5 +1,6 @@
 package Pages;
 
+import io.qameta.allure.Step;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -16,6 +17,7 @@ public class Authorization {
     private By enterButton = By.cssSelector("button.control.button2.button2_view_classic.button2_size_l.button2_theme_action.button2_width_max.button2_type_submit.passp-form-button");
     private By passwordInput = By.id("passp-field-passwd");
 
+    @Step("Авторизация по заданному логину {login} и паролю {password}")
     public void Authorise(ChromeDriver driver, String login, String password) throws InterruptedException {
         webElement = driver.findElement(loginInput);
         webElement.sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);

@@ -1,2 +1,0 @@
-testlogin.ivanov
-testpassword.ivanov

@@ -1,6 +1,7 @@
 package Tests;
 
 import Pages.*;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,6 +20,8 @@ public class BeruTests {
     private CiteCatalog citeCatalog = new CiteCatalog();
     private BeautyCatalog beautyCatalog = new BeautyCatalog();
     private ToothbrushesCatalog toothbrushesCatalog = new ToothbrushesCatalog();
+    private AccountWindow accountWindow = new AccountWindow();
+    private Settings settings = new Settings();
 
     @Before
     public void setUp()
@@ -37,18 +40,25 @@ public class BeruTests {
 
     }
 
-
+    @Test
     public void AuthorizationTest() throws InterruptedException {
         main.AuthoriseClick(driver);
         authorization.Authorise(driver,login,password);
         main.CheckAuthorization(driver);
+        driver.quit();
     }
 
-
+    @Test
     public void CityTest() throws InterruptedException {
         main.ChangeCityClick(driver);
         cityChange.ChangeCity(driver, city);
-        main.CheckCity(driver, city);
+        main.CityCheck(driver,city);
+        main.AuthoriseClick(driver);
+        authorization.Authorise(driver,login,password);
+        main.AccountClick(driver);
+        accountWindow.OrdersClick(driver);
+        settings.CheckCity(driver, city);
+        driver.quit();
 
     }
 
@@ -58,6 +68,8 @@ public class BeruTests {
         citeCatalog.BeautySectionClick(driver);
         beautyCatalog.ElectricToothbrushesClick(driver);
         toothbrushesCatalog.ChoseToothbrushPrice(driver,lowPrice,highPrice);
+        toothbrushesCatalog.CheckPriceRange(driver, lowPrice, highPrice);
+        toothbrushesCatalog.ClickShowMore(driver);
         driver.quit();
     }
 }

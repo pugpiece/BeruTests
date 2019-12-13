@@ -1,5 +1,6 @@
 package Pages;
 
+import io.qameta.allure.Step;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -17,6 +18,7 @@ public class CityChange {
     private By cityConfirmButton = By.cssSelector("button[data-tid='71e1c78d']._4qhIn2-ESi.Pjv3h3YbYr.THqSbzx07u");
     int i = 0;
 
+    @Step("Смена города с заданного по умолчанию на {city}")
     public void ChangeCity(ChromeDriver driver, String city) {
         char[] charArray = city.toCharArray();
         WebDriverWait wait = new WebDriverWait(driver, 10);
