@@ -1,22 +1,24 @@
-package Pages;
+package ru.beru.Pages;
 
 import io.qameta.allure.Step;
-import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.beru.WebSettings;
 
-public class CiteCatalog {
-    private WebElement webElement;
+public class CiteCatalog extends WebSettings{
+
+    public CiteCatalog(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+    }
 
     private By beautySection = By.className("_19FPGVzRi9");
 
     @Step("Выбор раздела красоты и гигиены в каталоге товаров")
-    public void BeautySectionClick(ChromeDriver driver){
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+    public void BeautySectionClick(){
         wait.until(ExpectedConditions.elementToBeClickable(beautySection));
         webElement = driver.findElement(beautySection);
         webElement.click();
