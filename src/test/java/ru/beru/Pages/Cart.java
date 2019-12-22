@@ -13,7 +13,7 @@ public class Cart extends WebSettings {
         PageFactory.initElements(driver, this);
     }
 
-    private By totalPrice = By.cssSelector("span[data-tid='c3eaad93']");
+    private By totalPrice = By.cssSelector("div[data-auto='price']");
     private By freeShipping = By.cssSelector("[class=\"_3BLMSktvAP\"]");
     private By purchaseButton = By.cssSelector("[class=\"_4qhIn2-ESi Pjv3h3YbYr THqSbzx07u _39B7yXQbvm _2W4X8tX6r0\"]");
     private By addOneMore = By.cssSelector("[class=\"_4qhIn2-ESi _2sJs248D-A _18c2gUxCdP _3hWhO4rvmA\"]");

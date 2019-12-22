@@ -3,6 +3,7 @@ package ru.beru.Pages;
 import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -21,7 +22,7 @@ public class ToothbrushesCatalog extends WebSettings{
     private By electricToothbrushesHighPrice = By.xpath("//span[@data-auto = 'filter-range-max']//input");
     private By showMoreButton = By.cssSelector("button[data-auto='pager-more']");
     private By labelOfPriceRange = By.cssSelector( "[class=\"_3GNV1gy3cc\"]");
-    private By neededToothbrush = By.xpath("(//button[contains(@class,'_4qhIn2-ESi _3OWdR9kZRH THqSbzx07u')])[25]");
+    private By neededToothbrush = By.xpath("(//button[contains(@class,'_4qhIn2-ESi _3OWdR9kZRH THqSbzx07u')])[24]");
     private By goToCart = By.cssSelector("[data-auto=\"executed-cart-button\"]");
 
 
@@ -41,9 +42,11 @@ public class ToothbrushesCatalog extends WebSettings{
 
     @Step("Нажатие на кнопку показать больше")
     public void ClickShowMore(){
-        wait.until(ExpectedConditions.elementToBeClickable(showMoreButton));
-        webElement = driver.findElement(showMoreButton);
-        webElement.click();
+        try {
+            webElement = driver.findElement(showMoreButton);
+            webElement.click();
+        }
+        catch (NoSuchElementException e){}
     }
 
     @Step("Проверка того, что заданный диапазон цен - от {lowPrice} до {highPrice}")
