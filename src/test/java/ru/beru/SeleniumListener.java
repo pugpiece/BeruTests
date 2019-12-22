@@ -156,7 +156,7 @@ public class SeleniumListener implements WebDriverEventListener {
     @Attachment(value = "Screenshot")
     public static byte[] takeScreenshot(By by, WebElement webElement, WebDriver driver) {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("arguments[0].style.border=''", driver.findElement(by));
+        jse.executeScript("arguments[0].style.border='2px solid green'", driver.findElement(by));
         try {
             Thread.sleep(100);
         }catch (Exception e) {}

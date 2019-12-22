@@ -32,7 +32,7 @@ public class WebSettings {
         url = "https://beru.ru";
         login = "testlogin.ivanov";
         password = "testpassword.ivanov";
-        wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, 100);
         driver.register(listener);
         driver.manage().window().fullscreen();
         driver.get(url);

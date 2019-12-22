@@ -17,13 +17,13 @@ public class ToothbrushesCatalog extends WebSettings{
         PageFactory.initElements(driver, this);
     }
 
-    private By electricToothbrushesLowPrice = By.xpath("//div[contains(@data-auto, " +
-            "'filter-range-glprice')]//span[contains(@data-auto, 'filter-range-min')]//input");
-    private By electricToothbrushesHighPrice = By.xpath("//div[contains(@data-auto, " +
-            "'filter-range-glprice')]//span[contains(@data-auto, 'filter-range-max')]//input");
+    private By electricToothbrushesLowPrice = By.xpath("//span[@data-auto = 'filter-range-min']//input");
+    private By electricToothbrushesHighPrice = By.xpath("//span[@data-auto = 'filter-range-max']//input");
     private By showMoreButton = By.cssSelector("button[data-auto='pager-more']");
-    private By toothbrushCollectionPrices = By.cssSelector("span._1u3j_pk1db._1pTV0mQZJz > span[data-tid='c3eaad93']:not(._3nXvrJWiZ0)");
-    private By listOFToothbrush = By.cssSelector("button._4qhIn2-ESi._3OWdR9kZRH.THqSbzx07u");
+    private By labelOfPriceRange = By.cssSelector( "[class=\"_3GNV1gy3cc\"]");
+    private By neededToothbrush = By.xpath("(//button[contains(@class,'_4qhIn2-ESi _3OWdR9kZRH THqSbzx07u')])[25]");
+    private By goToCart = By.cssSelector("[data-auto=\"executed-cart-button\"]");
+
 
 
     @Step("Установка диапазона цен зубных щеток от {lowPrice} до {highPrice}")
@@ -48,18 +48,20 @@ public class ToothbrushesCatalog extends WebSettings{
 
     @Step("Проверка того, что заданный диапазон цен - от {lowPrice} до {highPrice}")
     public void CheckToothbrushesPrices(int lowPrice, int highPrice){
-        List<WebElement> prices = webElement.findElements(toothbrushCollectionPrices);
-        for (WebElement price : prices) {
-            int p = Integer.parseInt(price.getText().replaceAll(" ", ""));
-            Assert.assertFalse(p < lowPrice || p > highPrice);
-        }
+        webElement = driver.findElement(labelOfPriceRange);
+        wait.until(ExpectedConditions.visibilityOf(webElement));
+        String priceRange = lowPrice + " — " + highPrice + " ₽";
+        Assert.assertEquals(priceRange, webElement.getText());
     }
 
     @Step("Добавление предпоследней расчески в корзину")
     public void BuyPreLastToothbrush(){
-        wait.until(ExpectedConditions.elementToBeClickable(listOFToothbrush));
-        List<WebElement> buttons = webElement.findElements(listOFToothbrush);
-        System.out.println(buttons.size());
+        driver.executeScript("window.scrollTo(0, document.body.scrollHeight / 3 * 2);");
+        webElement = driver.findElement(neededToothbrush);
+        webElement.click();
+        wait.until(ExpectedConditions.elementToBeClickable(goToCart));
+        webElement = driver.findElement(goToCart);
+        webElement.click();
 
     }
 }

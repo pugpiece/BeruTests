@@ -15,7 +15,7 @@ public class CiteCatalog extends WebSettings{
         PageFactory.initElements(driver, this);
     }
 
-    private By beautySection = By.className("_19FPGVzRi9");
+    private By beautySection = By.cssSelector("a[title='Красота и гигиена']");
 
     @Step("Выбор раздела красоты и гигиены в каталоге товаров")
     public void BeautySectionClick(){

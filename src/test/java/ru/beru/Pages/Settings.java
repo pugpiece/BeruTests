@@ -22,11 +22,11 @@ public class Settings extends WebSettings{
     @Step("Проверка того, что город в вверхнем левом углу - {city}")
     public void CheckCity(String city) {
         wait.until(ExpectedConditions.elementToBeClickable(cityUpRight ));
-        String city1 = driver.findElement(cityUpRight ).getText();
+        String cityUpRightText = driver.findElement(cityUpRight ).getText();
         wait.until(ExpectedConditions.elementToBeClickable(citySettings));
-        String city2 = driver.findElement(citySettings).getText();
-        Assert.assertEquals(city1, city2);
-        Assert.assertEquals(city1, city);
-        Assert.assertEquals(city2, city);
+        String citySettingsText = driver.findElement(citySettings).getText();
+        Assert.assertEquals(cityUpRightText, citySettingsText);
+        Assert.assertEquals(cityUpRightText, city);
+        Assert.assertEquals(citySettingsText, city);
     }
 }

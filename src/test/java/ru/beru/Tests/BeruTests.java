@@ -19,8 +19,8 @@ public class BeruTests extends WebSettings{
     private ToothbrushesCatalog toothbrushesCatalog = new ToothbrushesCatalog(driver);
     private AccountWindow accountWindow = new AccountWindow(driver);
     private Settings settings = new Settings(driver);
-    private int lowPrice;
-    private int highPrice;
+    private Cart cart = new Cart(driver);
+    private Purchase purchase = new Purchase(driver);
 
     @Test
     @Parameters({
@@ -52,19 +52,27 @@ public class BeruTests extends WebSettings{
 
     }
 
-
+    @Test
     public void ToothbrushTest() throws InterruptedException {
-        lowPrice = 999;
-        highPrice = 1999;
-        main.AuthoriseClick();
-        authorization.Authorise(login,password);
+        int lowPrice = 999;
+        int highPrice = 1999;
         main.CatalogClick();
         citeCatalog.BeautySectionClick();
         beautyCatalog.ElectricToothbrushesClick();
         toothbrushesCatalog.ChoseToothbrushPrice(lowPrice,highPrice);
+        toothbrushesCatalog.CheckToothbrushesPrices(lowPrice,highPrice);
         toothbrushesCatalog.ClickShowMore();
-        toothbrushesCatalog.CheckToothbrushesPrices(lowPrice, highPrice);
         toothbrushesCatalog.BuyPreLastToothbrush();
+        cart.CheckFreeShipping();
+        cart.GoToPurchase();
+        purchase.ChangeShipping();
+        purchase.CheckCorrectPrice();
+        purchase.GoToCart();
+        cart.AddOneMore();
+        cart.CheckFreeShipping();
+        cart.GoToPurchase();
+        purchase.ChangeShipping();
+        purchase.CheckCorrectPrice();
 }
 
 }
