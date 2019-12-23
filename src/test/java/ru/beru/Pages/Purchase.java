@@ -29,6 +29,7 @@ public class Purchase extends WebSettings {
 
     @Step("Проверка того, что цена общей доставки правильно посчитана")
     public void CheckCorrectPrice(){
+        wait.until(ExpectedConditions.elementToBeClickable(changeOrder));
         String[] itemPriceText = driver.findElement(itemPrice).getText().split(" ");
         String[] shippingPriceText = driver.findElement(shippingPrice).getText().split(" ");
         String[] totalPriceText = driver.findElement(totalPrice).getText().split(" ");

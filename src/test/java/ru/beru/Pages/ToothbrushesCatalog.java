@@ -22,7 +22,7 @@ public class ToothbrushesCatalog extends WebSettings{
     private By electricToothbrushesHighPrice = By.xpath("//span[@data-auto = 'filter-range-max']//input");
     private By showMoreButton = By.cssSelector("button[data-auto='pager-more']");
     private By labelOfPriceRange = By.cssSelector( "[class=\"_3GNV1gy3cc\"]");
-    private By neededToothbrush = By.xpath("(//button[contains(@class,'_4qhIn2-ESi _3OWdR9kZRH THqSbzx07u')])[24]");
+    private By neededToothbrush = By.xpath("(//button[contains(@class,'_4qhIn2-ESi _3OWdR9kZRH THqSbzx07u')])");
     private By goToCart = By.cssSelector("[data-auto=\"executed-cart-button\"]");
 
 
@@ -46,7 +46,7 @@ public class ToothbrushesCatalog extends WebSettings{
             webElement = driver.findElement(showMoreButton);
             webElement.click();
         }
-        catch (NoSuchElementException e){}
+        catch (Exception e){}
     }
 
     @Step("Проверка того, что заданный диапазон цен - от {lowPrice} до {highPrice}")
@@ -60,8 +60,8 @@ public class ToothbrushesCatalog extends WebSettings{
     @Step("Добавление предпоследней расчески в корзину")
     public void BuyPreLastToothbrush(){
         driver.executeScript("window.scrollTo(0, document.body.scrollHeight / 3 * 2);");
-        webElement = driver.findElement(neededToothbrush);
-        webElement.click();
+        List<WebElement> buyButtons = driver.findElements(neededToothbrush);
+        buyButtons.get(buyButtons.size()-2).click();
         wait.until(ExpectedConditions.elementToBeClickable(goToCart));
         webElement = driver.findElement(goToCart);
         webElement.click();
